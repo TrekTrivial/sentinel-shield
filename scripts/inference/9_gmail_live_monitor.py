@@ -1648,8 +1648,12 @@ class LiveSentinelShield:
                         # NEW: Get current total inbox count (for live deletion tracking)
                         logger.debug("[POLL] Counting total emails in INBOX...")
                         status, all_msg_ids = self.imap_server.search(None, "ALL")
-                        if status == "OK" and all_msg_ids[0]:
-                            current_inbox_count = len(all_msg_ids[0].split())
+                        if status == "OK":
+                            # Handle both empty and non-empty inboxes
+                            if all_msg_ids[0]:
+                                current_inbox_count = len(all_msg_ids[0].split())
+                            else:
+                                current_inbox_count = 0  # Inbox is empty
                             self.metrics['current_inbox_count'] = current_inbox_count
                             logger.debug(f"[POLL] Current inbox total: {current_inbox_count} emails")
                             # Persist the updated count immediately
