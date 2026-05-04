@@ -1,0 +1,40 @@
+# SENTINEL Backend Monitor - Dockerfile
+# Containerizes the Gmail IMAP monitoring system with 3-stream ML ensemble
+
+FROM python:3.11-slim
+
+# Set working directory
+WORKDIR /app
+
+# Install system dependencies (for pytesseract OCR support)
+RUN apt-get update && apt-get install -y \
+    tesseract-ocr \
+    libtesseract-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy requirements file first (for better layer caching)
+COPY requirements.txt .
+
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy entire project into container
+COPY . .
+
+# Create necessary directories for logs and data files
+RUN mkdir -p /app/training_logs \
+    && mkdir -p /app/results
+
+# Environment variables for Python
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE=1
+
+# Volume mount point for shared data files
+VOLUME ["/app"]
+
+# Health check - verify monitor can start
+HEALTHCHECK --interval=30s --timeout=10s --start-period=10s --retries=3 \
+    CMD python -c "import scripts.inference.sentinel_core; print('OK')" || exit 1
+
+# Run the monitoring system
+CMD ["python", "scripts/inference/9_gmail_live_monitor.py"]

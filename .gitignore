@@ -1,0 +1,171 @@
+# ============================================================================
+# PRODUCTION-READY .gitignore
+# Tracks everything Docker needs for inference + models
+# Excludes only development artifacts
+# ============================================================================
+
+# ============================================================================
+# CRITICAL SECURITY: Credentials & Secrets (NEVER COMMIT!)
+# ============================================================================
+.env
+.env.local
+.env.*.local
+token.pickle
+credentials.json
+oauth_token.json
+*.keystore
+*.jks
+secrets.txt
+private_key.pem
+public_key.pem
+certificate.pem
+
+# ============================================================================
+# CRITICAL SECURITY: Runtime State Files (NEVER COMMIT!)
+# ============================================================================
+# These contain live email metadata and detected threats
+.sentinel_state.json
+.sentinel_metrics.json
+.sentinel_threat_registry.json
+.sentinel_shield.log
+
+# ============================================================================
+# DEVELOPMENT ARTIFACTS ONLY (excluded from production repo)
+# ============================================================================
+
+# Training Data (large, regenerable)
+Data/
+data/
+
+# Training Logs & Results (dev-only)
+training_logs/
+results/
+out_emails/
+test_attachments/
+
+# Development Scripts (testing, training - NOT needed for inference)
+scripts/evaluation/
+scripts/stream_A_text/
+scripts/stream_B_url/
+scripts/stream_C_attachments/
+scripts/tools/
+scripts/results/
+scripts/test_dispatcher_init.py
+
+# Developer Documentation (internal - not for users)
+docs/
+tree.txt
+
+# ============================================================================
+# LOCAL CONFIGURATION (Users create their own from .example)
+# ============================================================================
+# NOTE: sentinel_config.yaml.example is tracked for deployment
+# Users can override by creating sentinel_config.yaml.local (not tracked)
+dashboard/config.json
+
+# ============================================================================
+# ENVIRONMENT & CACHE (device-specific, rebuilt in containers)
+# ============================================================================
+venv/
+venv_inference/
+venv_train/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+activate.bat
+Activate.ps1
+activate
+activate.csh
+deactivate.bat
+venv/Scripts/
+venv/Include/
+venv/Lib/
+*.egg-info/
+
+# Python Cache & Compiled Files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Streamlit Cache
+.streamlit/
+.streamlit/secrets.toml
+.streamlit/config.toml.local
+.streamlit_cache/
+__pycache__/streamlit*
+*.streamlit_cache
+
+# Testing & Coverage (dev-only)
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+test-results/
+coverage/
+
+# ============================================================================
+# IDE & EDITOR (local preferences)
+# ============================================================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+*.sublime-project
+*.sublime-workspace
+
+# ============================================================================
+# TEMPORARY & OS FILES
+# ============================================================================
+*.tmp
+*.temp
+.temp/
+.cache/
+Thumbs.db
+.AppleDouble
+.LSOverride
+*.lnk
+
+# Docker Volumes & Artifacts
+docker_volumes/
+.docker/
+
+# Jupyter Notebooks (dev-only)
+.ipynb_checkpoints/
+*.ipynb
+
+# ============================================================================
+# PRODUCTION FILES INCLUDED IN REPO:
+# ============================================================================
+# ✅ models/                    (ML models - TRACKED for Docker)
+# ✅ scripts/inference/         (production inference engines)
+# ✅ scripts/logging_config.py  (shared logging config)
+# ✅ dashboard/                 (web application)
+# ✅ docker-compose.yml         (container orchestration)
+# ✅ Dockerfile.*               (container definitions)
+# ✅ requirements.txt           (dependencies)
+# ✅ sentinel_config.yaml.example
+# ✅ README.md
+# ✅ LICENSE
+# ============================================================================

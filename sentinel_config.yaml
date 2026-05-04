@@ -1,0 +1,92 @@
+# SENTINEL Configuration File
+# ===========================
+# This file configures all hardcoded values for the SENTINEL phishing detection system.
+# Supports easy deployment across different environments (dev, staging, production).
+
+# IMAP Email Server Configuration
+imap:
+  server: "imap.gmail.com"
+  port: 993
+  folder_to_monitor: "INBOX"
+  polling_interval_seconds: 30  # Check for new emails every N seconds
+  connection_timeout_seconds: 30
+  idle_timeout_seconds: 600  # IMAP IDLE connection timeout
+
+# Security & Content Filtering
+security:
+  # Trusted sender domains (whitelisted - never flagged as phishing)
+  whitelist_domains:
+    - "accounts.google.com"
+    - "no-reply@accounts.google.com"
+    - "security@microsoft.com"
+    - "noreply@google.com"
+    - "support@google.com"
+    - "accounts@google.com"
+    - "security-noreply@google.com"
+  
+  # Attachment size limits
+  max_attachment_size_mb: 50  # Skip Stream C (attachment analysis) if larger
+  
+  # Analysis timeout
+  analysis_timeout_seconds: 30  # Max time to analyze a single email
+  
+  # File sanitization
+  dangerous_extensions:
+    - ".exe"
+    - ".bat"
+    - ".com"
+    - ".pif"
+    - ".scr"
+    - ".vbs"
+    - ".js"
+    - ".jar"
+    - ".zip"  # Often used to bypass email scanning
+    - ".rar"
+    - ".7z"
+
+# Machine Learning Model Configuration
+models:
+  enable_distilbert: true      # Stream A: Text classification
+  enable_xgboost: true         # Stream B: URL analysis
+  enable_attachment_analysis: true  # Stream C: Attachment analysis
+  fallback_to_heuristics: true  # Use simple rules if model fails
+  
+  # Model locations (relative to project root)
+  text_model_path: "models/text_model_distilbert"
+  url_model_path: "models/url_model_production"
+  
+  # GPU/CPU settings
+  use_gpu_if_available: true
+  gpu_device: 0  # GPU device ID (0 = first GPU)
+
+# Persistent Storage Paths
+storage:
+  # All paths are relative to project root and cross-OS compatible
+  state_file: ".sentinel_state.json"           # Processed UIDs (prevents duplicates)
+  metrics_file: ".sentinel_metrics.json"       # Session statistics
+  threat_registry_file: ".sentinel_threat_registry.json"  # Persistent threat history
+  log_file: ".sentinel_shield.log"             # Operation log
+  temp_attachment_dir: "Data/temp_attachments"  # Temporary attachment downloads
+
+# Dashboard Configuration
+dashboard:
+  port: 8501
+  refresh_interval_seconds: 60
+  max_threats_to_display: 10
+  threat_confidence_threshold_high: 0.8
+  threat_confidence_threshold_medium: 0.6
+
+# Logging Configuration
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR, CRITICAL
+  console_output: true
+  file_output: true
+  max_log_size_mb: 10
+  backup_log_count: 5
+
+# Feature Flags (for A/B testing and gradual rollouts)
+features:
+  enable_shap_explanations: true
+  enable_threat_registry: true
+  enable_live_metrics: true
+  enable_attachment_scanning: true

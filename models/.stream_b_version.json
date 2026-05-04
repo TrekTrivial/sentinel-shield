@@ -1,0 +1,19 @@
+{
+  "active_version": "v2",
+  "v1_path": "D:\\Documents\\sem-8\\Major Project phase 2\\Implement\\models\\stream_b_xgboost_production.pkl",
+  "v2_path": "D:\\Documents\\sem-8\\Major Project phase 2\\Implement\\models\\stream_b_xgboost_v2.pkl",
+  "deployment_history": [
+    {
+      "version": "v1",
+      "timestamp": "2026-04-06",
+      "status": "production",
+      "ood_detection_rate": "0.0%"
+    },
+    {
+      "version": "v2",
+      "timestamp": "2026-05-04 13:36:00",
+      "status": "production"
+    }
+  ],
+  "fallback_enabled": true
+}

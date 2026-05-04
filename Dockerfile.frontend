@@ -1,0 +1,71 @@
+# SENTINEL Frontend Dashboard - Dockerfile
+# Containerizes the Streamlit web UI with dark/light theme support
+
+FROM python:3.11-slim
+
+# Set working directory
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    curl \
+    git \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy dashboard requirements (lightweight - no heavy ML packages)
+COPY dashboard/requirements.txt .
+
+# Install dashboard dependencies with pre-built binaries only
+RUN pip install --no-cache-dir --only-binary :all: -r requirements.txt
+
+# Copy entire project into container
+COPY . .
+
+# Create necessary directories for Streamlit config
+RUN mkdir -p /app/.streamlit
+
+# Configure Streamlit with theme support
+RUN printf '%s\n' \
+    '[theme]' \
+    'primaryColor = "#1f77b4"' \
+    'backgroundColor = "#ffffff"' \
+    'secondaryBackgroundColor = "#f0f2f6"' \
+    'textColor = "#262730"' \
+    'font = "sans serif"' \
+    '' \
+    '[client]' \
+    'showErrorDetails = true' \
+    'showWarningOnDirectExecution = true' \
+    'toolbarMode = "viewer"' \
+    '' \
+    '[server]' \
+    'headless = true' \
+    'runOnSave = true' \
+    'port = 8501' \
+    'enableCORS = false' \
+    'enableXsrfProtection = true' \
+    'address = "0.0.0.0"' \
+    '' \
+    '[logger]' \
+    'level = "warning"' \
+    > /app/.streamlit/config.toml
+
+# Environment variables
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV STREAMLIT_SERVER_HEADLESS=true
+ENV STREAMLIT_SERVER_ADDRESS=0.0.0.0
+ENV STREAMLIT_SERVER_PORT=8501
+
+# Volume mount point for shared data files
+VOLUME ["/app"]
+
+# Expose Streamlit port
+EXPOSE 8501
+
+# Health check - verify Streamlit can start
+HEALTHCHECK --interval=30s --timeout=10s --start-period=15s --retries=3 \
+    CMD curl -f http://localhost:8501/_stcore/health || exit 1
+
+# Run Streamlit dashboard with theme support
+CMD ["streamlit", "run", "dashboard/app.py", "--server.address=0.0.0.0", "--server.port=8501", "--server.headless=true"]

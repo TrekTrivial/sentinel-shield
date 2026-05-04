@@ -1,0 +1,83 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: sentinel-backend-monitor
+    restart: unless-stopped
+    environment:
+      - PYTHONUNBUFFERED=1
+      - PYTHONDONTWRITEBYTECODE=1
+    volumes:
+      # Share entire project directory for real-time data file access
+      - .:/app
+      # Persist logs and results
+      - ./training_logs:/app/training_logs
+      - ./results:/app/results
+    networks:
+      - sentinel-network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import scripts.inference.sentinel_core; print('OK')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: sentinel-frontend-dashboard
+    restart: unless-stopped
+    ports:
+      # Map Streamlit port to host
+      - "8501:8501"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - PYTHONDONTWRITEBYTECODE=1
+      - STREAMLIT_SERVER_ADDRESS=0.0.0.0
+      - STREAMLIT_SERVER_PORT=8501
+      - STREAMLIT_SERVER_HEADLESS=true
+      - STREAMLIT_CLIENT_SHOWSTDERR=false
+      - STREAMLIT_LOGGER_LEVEL=warning
+      # Theme configuration (light by default)
+      - STREAMLIT_THEME_PRIMARYCOLOR="#1f77b4"
+      - STREAMLIT_THEME_BACKGROUNDCOLOR="#ffffff"
+      - STREAMLIT_THEME_SECONDARYBACKGROUNDCOLOR="#f0f2f6"
+      - STREAMLIT_THEME_TEXTCOLOR="#262730"
+    volumes:
+      # Share entire project directory for data file access
+      - .:/app
+      # Shared config
+      - ./dashboard/config.json:/app/dashboard/config.json:ro
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - sentinel-network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8501/_stcore/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+
+
+networks:
+  sentinel-network:
+    driver: bridge
+    name: sentinel-network
+
+volumes:
+  sentinel-data:
+    driver: local

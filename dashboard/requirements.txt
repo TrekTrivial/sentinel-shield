@@ -1,0 +1,11 @@
+# Streamlit Dashboard Requirements
+# Pinned versions for reproducibility
+# Compatible with Python 3.11 and Docker containers
+
+streamlit==1.28.1
+pandas==1.5.3
+plotly==5.13.0
+numpy==1.23.5
+altair==4.2.2
+protobuf==3.20.0
+pillow==9.5.0
