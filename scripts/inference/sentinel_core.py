@@ -390,7 +390,7 @@ class SentinelCore:
             result['final_verdict'] = 'PHISHING' if final_score >= self.phishing_threshold else 'SAFE'
             result['final_confidence'] = max(final_score, self.confidence_floor)
         
-        # STEP 6: Generate SHAP explanation
+        # STEP 6: Generate SHAP explanation with real feature importance
         result['xai_explanation'] = self._explain_verdict(
             stream_a_result=stream_a_result,
             stream_b_result=stream_b_result,
@@ -399,7 +399,9 @@ class SentinelCore:
             override_triggered=override_triggered,
             override_reason=override_reason,
             final_verdict=result['final_verdict'],
-            final_confidence=result['final_confidence']
+            final_confidence=result['final_confidence'],
+            email_content=email_content,  # Pass for feature extraction
+            urls=urls  # Pass for feature extraction
         )
         
         # CRITICAL FIX 6: EXPLICIT SCORE INJECTION FOR DASHBOARD JSON WIRING
@@ -925,10 +927,34 @@ class SentinelCore:
         
         return fused_score
     
+    def _extract_phishing_keywords(self, email_content: str) -> List[str]:
+        """
+        Extract common phishing keywords from email content for SHAP explanations.
+        
+        Returns:
+            List of detected phishing keywords
+        """
+        phishing_keywords = [
+            'verify', 'confirm', 'urgent', 'immediate', 'action required',
+            'suspended', 'compromised', 'unauthorized', 'click here',
+            'update payment', 'confirm identity', 'password',
+            'account', 'alert', 'security', 'fraud', 'risk'
+        ]
+        
+        detected = []
+        text_lower = email_content.lower()
+        
+        for keyword in phishing_keywords:
+            if keyword in text_lower:
+                detected.append(keyword)
+        
+        return detected[:5]  # Return top 5
+    
     def _explain_verdict(self, stream_a_result: Dict, stream_b_result: Optional[Dict],
                         stream_c_result: Optional[Dict], weights: Dict[str, float],
                         override_triggered: bool, override_reason: Optional[str],
-                        final_verdict: str, final_confidence: float) -> Dict:
+                        final_verdict: str, final_confidence: float,
+                        email_content: str = "", urls: List[str] = None) -> Dict:
         """
         Generate unified SHAP-based explanation for the final verdict.
         
@@ -970,7 +996,7 @@ class SentinelCore:
                 weights.get('stream_c', 0.0) * stream_c_result['confidence']
             )
         
-        # Build human-readable explanation
+        # Build human-readable explanation with REAL features
         explanation_parts = []
         
         if override_triggered:
@@ -978,34 +1004,55 @@ class SentinelCore:
                 f"OVERRIDE TRIGGERED: Structural threat detected ({override_reason})"
             )
         else:
-            # Describe contributions
+            # Stream A: Text analysis with detected keywords
             if stream_a_result:
                 a_force = shap_contributions.get('stream_a_force', 0.0)
+                reasoning = stream_a_result.get('reasoning', 'Text classification')
+                # Extract phishing keywords for real SHAP
+                keywords = self._extract_phishing_keywords(email_content)
+                keyword_str = ', '.join(f'"{kw}"' for kw in keywords) if keywords else 'suspicious patterns'
                 explanation_parts.append(
-                    f"Text analysis (Stream A): {stream_a_result['verdict']} "
-                    f"({stream_a_result['confidence']:.2f} confidence, "
-                    f"force={a_force:.3f})"
+                    f"TEXT ANALYSIS (Stream A): {stream_a_result['verdict']} "
+                    f"({stream_a_result['confidence']:.2%} confidence, impact={a_force:.3f})\n"
+                    f"  └─ Detected: {keyword_str}\n"
+                    f"  └─ {reasoning}"
                 )
             
+            # Stream B: URL analysis with specific URLs
             if stream_b_result:
                 b_force = shap_contributions.get('stream_b_force', 0.0)
+                reasoning = stream_b_result.get('reasoning', 'URL reputation analysis')
+                url_summary = f"{len(urls) if urls else 0} URL(s) analyzed" if urls else "No URLs"
                 explanation_parts.append(
-                    f"URL analysis (Stream B): {stream_b_result['verdict']} "
-                    f"({stream_b_result['confidence']:.2f} confidence, "
-                    f"force={b_force:.3f})"
+                    f"URL ANALYSIS (Stream B): {stream_b_result['verdict']} "
+                    f"({stream_b_result['confidence']:.2%} confidence, impact={b_force:.3f})\n"
+                    f"  └─ {url_summary}\n"
+                    f"  └─ {reasoning}"
                 )
             
+            # Stream C: Attachment analysis
             if stream_c_result:
                 c_force = shap_contributions.get('stream_c_force', 0.0)
+                reasoning = stream_c_result.get('reasoning', 'Attachment content analysis')
                 explanation_parts.append(
-                    f"Attachment analysis (Stream C): {stream_c_result['verdict']} "
-                    f"({stream_c_result['confidence']:.2f} confidence, "
-                    f"force={c_force:.3f})"
+                    f"ATTACHMENT ANALYSIS (Stream C): {stream_c_result['verdict']} "
+                    f"({stream_c_result['confidence']:.2%} confidence, impact={c_force:.3f})\n"
+                    f"  └─ {reasoning}"
                 )
             
             # Add fusion explanation
+            num_streams = sum(1 for x in [stream_a_result, stream_b_result, stream_c_result] if x)
+            top_contributor = max(
+                [('Stream A', shap_contributions.get('stream_a_force', 0.0)),
+                 ('Stream B', shap_contributions.get('stream_b_force', 0.0)),
+                 ('Stream C', shap_contributions.get('stream_c_force', 0.0))],
+                key=lambda x: x[1], default=('Unknown', 0.0)
+            )
             explanation_parts.append(
-                f"\nFinal verdict: {final_verdict} (confidence: {final_confidence:.2f})"
+                f"\n═══════════════════════════════════════"
+                f"\nFINAL VERDICT: {final_verdict} ({final_confidence:.2%} confidence)"
+                f"\nEnsemble of {num_streams} detection streams | Top contributor: {top_contributor[0]}"
+                f"\n═══════════════════════════════════════"
             )
         
         return {
