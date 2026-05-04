@@ -715,10 +715,14 @@ class LiveSentinelShield:
             logger.warning(f"Error updating metrics: {type(e).__name__}: {e}")
     
     def save_metrics(self):
-        """Persist metrics to file."""
+        """Persist metrics to file with heartbeat timestamp."""
         try:
+            # Add heartbeat timestamp to show monitor is alive
+            metrics_with_heartbeat = self.metrics.copy()
+            metrics_with_heartbeat['last_heartbeat'] = datetime.now().isoformat()
+            
             with open(self.metrics_file, 'w', encoding='utf-8') as f:
-                json.dump(self.metrics, f, indent=2, ensure_ascii=False)
+                json.dump(metrics_with_heartbeat, f, indent=2, ensure_ascii=False)
         except Exception as e:
             logger.warning(f"Failed to save metrics: {e}")
     
@@ -1662,6 +1666,11 @@ class LiveSentinelShield:
                             logger.info("[MONITOR] ═══════════════════════════════════════════")
                         else:
                             logger.debug("[POLL] No new emails at this time")
+                        
+                        # HEARTBEAT: Always save metrics to keep dashboard alive
+                        # This ensures the timestamp is updated every 30 seconds
+                        self.save_metrics()
+                        logger.debug(f"[HEARTBEAT] Metrics updated (Active: {datetime.now().isoformat()})")
                         
                         # Periodic orphaned file cleanup (every 10 polls = every 5 minutes)
                         poll_counter += 1

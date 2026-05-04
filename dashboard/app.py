@@ -404,28 +404,47 @@ with st.sidebar:
     # System Status
     st.subheader("📊 System Status")
     
-    # Check if monitor is running by checking metrics file (updated with every email)
+    # Check if monitor is running by checking metrics file heartbeat
     metrics_path = Path(__file__).parent.parent / ".sentinel_metrics.json"
-    log_path = Path(__file__).parent.parent / ".sentinel_shield.log"
     
-    # CRITICAL FIX 9: Use metrics file for status (updated with every email analyzed)
-    # instead of log file (which may have gaps between emails)
-    status_path = metrics_path if metrics_path.exists() else log_path
-    
-    if status_path.exists():
-        status_mtime = datetime.fromtimestamp(status_path.stat().st_mtime)
-        time_diff = datetime.now() - status_mtime
-        
-        # Use 5-minute threshold instead of 2 (emails don't arrive every second)
-        if time_diff.total_seconds() < 300:  # Updated in last 5 minutes
-            st.success("✅ Monitor Active")
-        else:
-            inactive_mins = int(time_diff.total_seconds() // 60)
-            st.warning(f"⏸️ Monitor Inactive ({inactive_mins}m ago)")
-        
-        st.caption(f"Last update: {status_mtime.strftime('%Y-%m-%d %H:%M:%S')}")
+    if metrics_path.exists():
+        try:
+            with open(metrics_path, 'r', encoding='utf-8') as f:
+                metrics_data = json.load(f)
+            
+            # Check for heartbeat timestamp (updated every 30 seconds)
+            last_heartbeat_str = metrics_data.get('last_heartbeat')
+            if last_heartbeat_str:
+                last_heartbeat = datetime.fromisoformat(last_heartbeat_str)
+                time_diff = datetime.now() - last_heartbeat
+                
+                # If heartbeat is within 60 seconds, monitor is definitely active
+                if time_diff.total_seconds() < 60:
+                    st.success("✅ Monitor Active (Live)")
+                # If heartbeat is recent (within 2 minutes), likely still active
+                elif time_diff.total_seconds() < 120:
+                    st.success("✅ Monitor Active")
+                else:
+                    inactive_mins = int(time_diff.total_seconds() // 60)
+                    st.warning(f"⏸️ Monitor Inactive ({inactive_mins}m ago)")
+                
+                st.caption(f"Last heartbeat: {last_heartbeat.strftime('%Y-%m-%d %H:%M:%S')}")
+            else:
+                # Fallback to file modification time if no heartbeat field
+                status_mtime = datetime.fromtimestamp(metrics_path.stat().st_mtime)
+                time_diff = datetime.now() - status_mtime
+                
+                if time_diff.total_seconds() < 300:  # 5-minute threshold
+                    st.success("✅ Monitor Active")
+                else:
+                    inactive_mins = int(time_diff.total_seconds() // 60)
+                    st.warning(f"⏸️ Monitor Inactive ({inactive_mins}m ago)")
+                
+                st.caption(f"Last update: {status_mtime.strftime('%Y-%m-%d %H:%M:%S')}")
+        except Exception as e:
+            st.error(f"❌ Error reading metrics: {e}")
     else:
-        st.error("❌ No logs found - Monitor not started")
+        st.error("❌ No metrics found - Monitor not started")
     
     st.markdown("---")
     
