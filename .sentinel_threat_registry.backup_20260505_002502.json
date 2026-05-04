@@ -1,0 +1,913 @@
+{
+  "threats": [
+    {
+      "uid": "785",
+      "timestamp": "2026-05-04T14:03:31.174730",
+      "sender": "Test Case 23 <dreadlife2combat@gmail.com>",
+      "subject": "Invoice #INV-2026-847293 - Payment Confirmation Required",
+      "final_confidence": 0.95,
+      "has_urls": true,
+      "has_attachments": true,
+      "stream_a_score": 0.9998056292533875,
+      "stream_b_score": 0.95,
+      "stream_c_score": 0.8,
+      "shap_explanation": "OVERRIDE TRIGGERED: Structural threat detected (DangerousExtensionHandler)",
+      "urls_detected": [
+        "http://192.168.1.100:9999/billing/verify?invoice=INV-2026-847293"
+      ],
+      "attachments_detected": [
+        "invoice_INV-2026-847293.pdf.exe"
+      ],
+      "stream_a_reasoning": "DistilBERT text classification",
+      "stream_b_reasoning": "XGBoost URL classifier (0.9974) + Heuristic boosts: IP-based domain: 192.168.1.100, Credential harvesting pattern detected",
+      "stream_c_reasoning": "Master Attachment Analyzer (PDF/Excel/Office/Image/HTML)",
+      "stream_breakdown": {
+        "stream_a": 0.9998056292533875,
+        "stream_b": 0.95,
+        "stream_c": 0.8
+      }
+    },
+    {
+      "uid": "787",
+      "timestamp": "2026-05-04T14:03:35.139169",
+      "sender": "Test Case 1 <dreadlife2combat@gmail.com>",
+      "subject": "URGENT: Password reset required immediately",
+      "final_confidence": 0.906902905702591,
+      "has_urls": false,
+      "has_attachments": false,
+      "stream_a_score": 0.9998929500579834,
+      "stream_b_score": 0.0,
+      "stream_c_score": 0.0,
+      "shap_explanation": "Text analysis (Stream A): PHISHING (1.00 confidence, force=0.907)\n\nFinal verdict: PHISHING (confidence: 0.91)",
+      "urls_detected": [],
+      "attachments_detected": [],
+      "stream_a_reasoning": "DistilBERT text classification",
+      "stream_b_reasoning": "",
+      "stream_c_reasoning": "",
+      "stream_breakdown": {
+        "stream_a": 0.9998929500579834,
+        "stream_b": 0.0,
+        "stream_c": 0.0
+      }
+    },
+    {
+      "uid": "788",
+      "timestamp": "2026-05-04T14:03:37.140696",
+      "sender": "Test Case 2 <dreadlife2combat@gmail.com>",
+      "subject": "Important Security Update Available",
+      "final_confidence": 0.9773945491909981,
+      "has_urls": true,
+      "has_attachments": false,
+      "stream_a_score": 0.9993595480918884,
+      "stream_b_score": 0.95,
+      "stream_c_score": 0.0,
+      "shap_explanation": "Text analysis (Stream A): PHISHING (1.00 confidence, force=0.555)\nURL analysis (Stream B): SUSPICIOUS (0.95 confidence, force=0.423)\n\nFinal verdict: PHISHING (confidence: 0.98)",
+      "urls_detected": [
+        "https://192.168.1.1/phishing/login.php"
+      ],
+      "attachments_detected": [],
+      "stream_a_reasoning": "DistilBERT text classification",
+      "stream_b_reasoning": "XGBoost URL classifier (0.9904) + Heuristic boosts: IP-based domain: 192.168.1.1, Credential harvesting pattern detected",
+      "stream_c_reasoning": "",
+      "stream_breakdown": {
+        "stream_a": 0.9993595480918884,
+        "stream_b": 0.95,
+        "stream_c": 0.0
+      }
+    },
+    {
+      "uid": "790",
+      "timestamp": "2026-05-04T14:03:41.244777",
+      "sender": "Test Case 4 <dreadlife2combat@gmail.com>",
+      "subject": "Account Information - Do Not Delete",
+      "final_confidence": 0.6841511356830596,
+      "has_urls": false,
+      "has_attachments": true,
+      "stream_a_score": 0.9915233850479126,
+      "stream_b_score": 0.0,
+      "stream_c_score": 0.0,
+      "shap_explanation": "Text analysis (Stream A): PHISHING (0.99 confidence, force=0.684)\nAttachment analysis (Stream C): SAFE (0.00 confidence, force=0.000)\n\nFinal verdict: PHISHING (confidence: 0.68)",
+      "urls_detected": [],
+      "attachments_detected": [
+        "account_data.bin"
+      ],
+      "stream_a_reasoning": "DistilBERT text classification",
+      "stream_b_reasoning": "",
+      "stream_c_reasoning": "Master Attachment Analyzer (PDF/Excel/Office/Image/HTML)",
+      "stream_breakdown": {
+        "stream_a": 0.9915233850479126,
+        "stream_b": 0.0,
+        "stream_c": 0.0
+      }
+    },
+    {
+      "uid": "792",
+      "timestamp": "2026-05-04T14:04:19.138240",
+      "sender": "Test Case 6 <dreadlife2combat@gmail.com>",
+      "subject": "PayPal Account Verification Required",
+      "final_confidence": 0.9775262098908425,
+      "has_urls": true,
+      "has_attachments": false,
+      "stream_a_score": 0.9995967745780945,
+      "stream_b_score": 0.95,
+      "stream_c_score": 0.0,
+      "shap_explanation": "Text analysis (Stream A): PHISHING (1.00 confidence, force=0.555)\nURL analysis (Stream B): SUSPICIOUS (0.95 confidence, force=0.423)\n\nFinal verdict: PHISHING (confidence: 0.98)",
+      "urls_detected": [
+        "https://evil.xyz/phishing?token=aHR0cHM6Ly9wYXlwYWwtcGhpc2hpbmcuY29tL2xvZ2lu"
+      ],
+      "attachments_detected": [],
+      "stream_a_reasoning": "DistilBERT text classification",
+      "stream_b_reasoning": "XGBoost URL classifier (0.9906) + Heuristic boosts: Red-flag domain: evil",
+      "stream_c_reasoning": "",
+      "stream_breakdown": {
+        "stream_a": 0.9995967745780945,
+        "stream_b": 0.95,
+        "stream_c": 0.0
+      }
+    },
+    {
+      "uid": "794",
+      "timestamp": "2026-05-04T14:05:16.771887",
+      "sender": "Test Case 8 <dreadlife2combat@gmail.com>",
+      "subject": "Your Apple ID Verification",
+      "final_confidence": 0.9769449179768562,
+      "has_urls": true,
+      "has_attachments": false,
+      "stream_a_score": 0.9985494017601013,
+      "stream_b_score": 0.95,
+      "stream_c_score": 0.0,
+      "shap_explanation": "Text analysis (Stream A): PHISHING (1.00 confidence, force=0.554)\nURL analysis (Stream B): SUSPICIOUS (0.95 confidence, force=0.423)\n\nFinal verdict: PHISHING (confidence: 0.98)",
+      "urls_detected": [
+        "https://evil-2.com",
+        "https://evil-3.com",
+        "https://evil-1.com"
+      ],
+      "attachments_detected": [],
+      "stream_a_reasoning": "DistilBERT text classification",
+      "stream_b_reasoning": "XGBoost URL classifier (0.8972) + Heuristic boosts: Red-flag domain: evil, Red-flag domain: evil",
+      "stream_c_reasoning": "",
+      "stream_breakdown": {
+        "stream_a": 0.9985494017601013,
+        "stream_b": 0.95,
+        "stream_c": 0.0
+      }
+    },
+    {
+      "uid": "795",
+      "timestamp": "2026-05-04T14:05:18.466888",
+      "sender": "Test Case 9 <dreadlife2combat@gmail.com>",
+      "subject": "Webmail Session Expired",
+      "final_confidence": 0.9746073781847954,
+      "has_urls": true,
+      "has_attachments": false,
+      "stream_a_score": 0.9943376183509827,
+      "stream_b_score": 0.95,
+      "stream_c_score": 0.0,
+      "shap_explanation": "Text analysis (Stream A): PHISHING (0.99 confidence, force=0.552)\nURL analysis (Stream B): SUSPICIOUS (0.95 confidence, force=0.423)\n\nFinal verdict: PHISHING (confidence: 0.97)",
+      "urls_detected": [
+        "http://10.0.0.1:8080/webmail/login.php?redirect=email"
+      ],
+      "attachments_detected": [],
+      "stream_a_reasoning": "DistilBERT text classification",
+      "stream_b_reasoning": "XGBoost URL classifier (0.9951) + Heuristic boosts: IP-based domain: 10.0.0.1, Credential harvesting pattern detected",
+      "stream_c_reasoning": "",
+      "stream_breakdown": {
+        "stream_a": 0.9943376183509827,
+        "stream_b": 0.95,
+        "stream_c": 0.0
+      }
+    },
+    {
+      "uid": "796",
+      "timestamp": "2026-05-04T14:05:20.403397",
+      "sender": "Test Case 10 <dreadlife2combat@gmail.com>",
+      "subject": "Important Company Policy Update - Please Review",
+      "final_confidence": 0.95,
+      "has_urls": false,
+      "has_attachments": true,
+      "stream_a_score": 0.0017087188316509128,
+      "stream_b_score": 0.0,
+      "stream_c_score": 0.35,
+      "shap_explanation": "OVERRIDE TRIGGERED: Structural threat detected (OfficeDocAnalyzer (Macro Detection))",
+      "urls_detected": [],
+      "attachments_detected": [
+        "policy_update.docm"
+      ],
+      "stream_a_reasoning": "DistilBERT text classification",
+      "stream_b_reasoning": "",
+      "stream_c_reasoning": "Master Attachment Analyzer (PDF/Excel/Office/Image/HTML)",
+      "stream_breakdown": {
+        "stream_a": 0.0017087188316509128,
+        "stream_b": 0.0,
+        "stream_c": 0.35
+      }
+    },
+    {
+      "uid": "797",
+      "timestamp": "2026-05-04T14:05:22.142434",
+      "sender": "Test Case 11 <dreadlife2combat@gmail.com>",
+      "subject": "Q1 2026 Financial Reports",
+      "final_confidence": 0.95,
+      "has_urls": false,
+      "has_attachments": true,
+      "stream_a_score": 0.9546454548835754,
+      "stream_b_score": 0.0,
+      "stream_c_score": 0.25,
+      "shap_explanation": "OVERRIDE TRIGGERED: Structural threat detected (ZipArchiveHandler)",
+      "urls_detected": [],
+      "attachments_detected": [
+        "Q1_Report.pdf",
+        "summary.xlsx",
+        "archive.zip"
+      ],
+      "stream_a_reasoning": "DistilBERT text classification",
+      "stream_b_reasoning": "",
+      "stream_c_reasoning": "Master Attachment Analyzer (PDF/Excel/Office/Image/HTML)",
+      "stream_breakdown": {
+        "stream_a": 0.9546454548835754,
+        "stream_b": 0.0,
+        "stream_c": 0.25
+      }
+    },
+    {
+      "uid": "798",
+      "timestamp": "2026-05-04T14:05:24.114217",
+      "sender": "Test Case 12 <dreadlife2combat@gmail.com>",
+      "subject": "Your Requested Files",
+      "final_confidence": 0.95,
+      "has_urls": false,
+      "has_attachments": true,
+      "stream_a_score": 0.9866588115692139,
+      "stream_b_score": 0.0,
+      "stream_c_score": 0.25,
+      "shap_explanation": "OVERRIDE TRIGGERED: Structural threat detected (ZipArchiveHandler)",
+      "urls_detected": [],
+      "attachments_detected": [
+        "documents.zip"
+      ],
+      "stream_a_reasoning": "DistilBERT text classification",
+      "stream_b_reasoning": "",
+      "stream_c_reasoning": "Master Attachment Analyzer (PDF/Excel/Office/Image/HTML)",
+      "stream_breakdown": {
+        "stream_a": 0.9866588115692139,
+        "stream_b": 0.0,
+        "stream_c": 0.25
+      }
+    },
+    {
+      "uid": "799",
+      "timestamp": "2026-05-04T14:05:26.301374",
+      "sender": "Test Case 13 <dreadlife2combat@gmail.com>",
+      "subject": "=?utf-8?q?URGENTE=3A_Verificaci=C3=B3n_de_cuenta_requerida?=",
+      "final_confidence": 0.977592635691166,
+      "has_urls": true,
+      "has_attachments": false,
+      "stream_a_score": 0.9997164607048035,
+      "stream_b_score": 0.95,
+      "stream_c_score": 0.0,
+      "shap_explanation": "Text analysis (Stream A): PHISHING (1.00 confidence, force=0.555)\nURL analysis (Stream B): SUSPICIOUS (0.95 confidence, force=0.423)\n\nFinal verdict: PHISHING (confidence: 0.98)",
+      "urls_detected": [
+        "https://banco-falso-phishing.es/verify"
+      ],
+      "attachments_detected": [],
+      "stream_a_reasoning": "DistilBERT text classification",
+      "stream_b_reasoning": "XGBoost URL classifier (0.9772) + Heuristic boosts: Red-flag domain: phishing, Credential harvesting pattern detected",
+      "stream_c_reasoning": "",
+      "stream_breakdown": {
+        "stream_a": 0.9997164607048035,
+        "stream_b": 0.95,
+        "stream_c": 0.0
+      }
+    },
+    {
+      "uid": "800",
+      "timestamp": "2026-05-04T14:05:29.367389",
+      "sender": "Test Case 14 <dreadlife2combat@gmail.com>",
+      "subject": "=?utf-8?b?4KSk4KSk4KWN4KSV4KS+4KSyOiDgpJbgpL7gpKTgpL4g4KS44KSk4KWN?=\r\n =?utf-8?b?4KSv4KS+4KSq4KSoIOCkhuCkteCktuCljeCkr+CklQ==?=",
+      "final_confidence": 0.8989251711368561,
+      "has_urls": false,
+      "has_attachments": false,
+      "stream_a_score": 0.9910972118377686,
+      "stream_b_score": 0.0,
+      "stream_c_score": 0.0,
+      "shap_explanation": "Text analysis (Stream A): PHISHING (0.99 confidence, force=0.899)\n\nFinal verdict: PHISHING (confidence: 0.90)",
+      "urls_detected": [],
+      "attachments_detected": [],
+      "stream_a_reasoning": "DistilBERT text classification",
+      "stream_b_reasoning": "",
+      "stream_c_reasoning": "",
+      "stream_breakdown": {
+        "stream_a": 0.9910972118377686,
+        "stream_b": 0.0,
+        "stream_c": 0.0
+      }
+    },
+    {
+      "uid": "801",
+      "timestamp": "2026-05-04T14:05:31.255433",
+      "sender": "Test Case 15 <dreadlife2combat@gmail.com>",
+      "subject": "IMPORTANT NOTICE:\r\n AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\r\n VERIFY YOUR ACCOUNT NOW OR FACE PERMANENT SUSPENSION AND ACCOUNT TERMINATION",
+      "final_confidence": 0.7164108140468598,
+      "has_urls": false,
+      "has_attachments": false,
+      "stream_a_score": 0.7898685932159424,
+      "stream_b_score": 0.0,
+      "stream_c_score": 0.0,
+      "shap_explanation": "Text analysis (Stream A): PHISHING (0.79 confidence, force=0.716)\n\nFinal verdict: PHISHING (confidence: 0.72)",
+      "urls_detected": [],
+      "attachments_detected": [],
+      "stream_a_reasoning": "DistilBERT text classification",
+      "stream_b_reasoning": "",
+      "stream_c_reasoning": "",
+      "stream_breakdown": {
+        "stream_a": 0.7898685932159424,
+        "stream_b": 0.0,
+        "stream_c": 0.0
+      }
+    },
+    {
+      "uid": "802",
+      "timestamp": "2026-05-04T14:05:33.019860",
+      "sender": "Test Case 16 <dreadlife2combat@gmail.com>",
+      "subject": "Large Document Bundle",
+      "final_confidence": 0.6854338932037353,
+      "has_urls": false,
+      "has_attachments": true,
+      "stream_a_score": 0.993382453918457,
+      "stream_b_score": 0.0,
+      "stream_c_score": 0.0,
+      "shap_explanation": "Text analysis (Stream A): PHISHING (0.99 confidence, force=0.685)\nAttachment analysis (Stream C): SAFE (0.00 confidence, force=0.000)\n\nFinal verdict: PHISHING (confidence: 0.69)",
+      "urls_detected": [],
+      "attachments_detected": [
+        "document_1.pdf",
+        "document_2.pdf",
+        "document_3.pdf",
+        "document_4.pdf",
+        "document_5.pdf",
+        "document_6.pdf",
+        "document_7.pdf",
+        "document_8.pdf",
+        "document_9.pdf",
+        "document_10.pdf"
+      ],
+      "stream_a_reasoning": "DistilBERT text classification",
+      "stream_b_reasoning": "",
+      "stream_c_reasoning": "Master Attachment Analyzer (PDF/Excel/Office/Image/HTML)",
+      "stream_breakdown": {
+        "stream_a": 0.993382453918457,
+        "stream_b": 0.0,
+        "stream_c": 0.0
+      }
+    },
+    {
+      "uid": "803",
+      "timestamp": "2026-05-04T14:05:35.429238",
+      "sender": "Test Case 17 <dreadlife2combat@gmail.com>",
+      "subject": "=?utf-8?b?4pqg77iPIPCfmqggQUxFUlQg8J+aqCDimqDvuI8gWW91ciBBY2NvdW50?=\r\n =?utf-8?b?IMKp77iPwq7vuI/ihKLvuI8gaXMgQ09NUFJPTUlTRUQhISE=?=",
+      "final_confidence": 0.9066010808348656,
+      "has_urls": false,
+      "has_attachments": false,
+      "stream_a_score": 0.9995601773262024,
+      "stream_b_score": 0.0,
+      "stream_c_score": 0.0,
+      "shap_explanation": "Text analysis (Stream A): PHISHING (1.00 confidence, force=0.907)\n\nFinal verdict: PHISHING (confidence: 0.91)",
+      "urls_detected": [],
+      "attachments_detected": [],
+      "stream_a_reasoning": "DistilBERT text classification",
+      "stream_b_reasoning": "",
+      "stream_c_reasoning": "",
+      "stream_breakdown": {
+        "stream_a": 0.9995601773262024,
+        "stream_b": 0.0,
+        "stream_c": 0.0
+      }
+    },
+    {
+      "uid": "804",
+      "timestamp": "2026-05-04T14:05:37.592470",
+      "sender": "Test Case 18 <dreadlife2combat@gmail.com>",
+      "subject": "Special Offer Inside",
+      "final_confidence": 0.974640624165535,
+      "has_urls": true,
+      "has_attachments": false,
+      "stream_a_score": 0.9943975210189819,
+      "stream_b_score": 0.95,
+      "stream_c_score": 0.0,
+      "shap_explanation": "Text analysis (Stream A): PHISHING (0.99 confidence, force=0.552)\nURL analysis (Stream B): SUSPICIOUS (0.95 confidence, force=0.423)\n\nFinal verdict: PHISHING (confidence: 0.97)",
+      "urls_detected": [
+        "https://phishing-site.com/offer"
+      ],
+      "attachments_detected": [],
+      "stream_a_reasoning": "DistilBERT text classification",
+      "stream_b_reasoning": "XGBoost URL classifier (0.9769) + Heuristic boosts: Red-flag domain: phishing",
+      "stream_c_reasoning": "",
+      "stream_breakdown": {
+        "stream_a": 0.9943975210189819,
+        "stream_b": 0.95,
+        "stream_c": 0.0
+      }
+    },
+    {
+      "uid": "805",
+      "timestamp": "2026-05-04T14:05:39.453511",
+      "sender": "Test Case 19 <dreadlife2combat@gmail.com>",
+      "subject": "URGENT: IMMEDIATE ACTION REQUIRED - Account Compromised",
+      "final_confidence": 0.95,
+      "has_urls": true,
+      "has_attachments": true,
+      "stream_a_score": 0.9998655319213867,
+      "stream_b_score": 0.9685288071632385,
+      "stream_c_score": 0.35,
+      "shap_explanation": "OVERRIDE TRIGGERED: Structural threat detected (OfficeDocAnalyzer (Macro Detection))",
+      "urls_detected": [
+        "https://aHR0cHM6Ly9tYWxpY2lvdXMtYmFuay5jb20vdmVyaWZ5"
+      ],
+      "attachments_detected": [
+        "account_security_update.docm"
+      ],
+      "stream_a_reasoning": "DistilBERT text classification",
+      "stream_b_reasoning": "XGBoost URL classifier (0.9685)",
+      "stream_c_reasoning": "Master Attachment Analyzer (PDF/Excel/Office/Image/HTML)",
+      "stream_breakdown": {
+        "stream_a": 0.9998655319213867,
+        "stream_b": 0.9685288071632385,
+        "stream_c": 0.35
+      }
+    },
+    {
+      "uid": "806",
+      "timestamp": "2026-05-04T14:05:41.137006",
+      "sender": "Test Case 20 <dreadlife2combat@gmail.com>",
+      "subject": "Q2 2026 Financial Analysis Report",
+      "final_confidence": 0.95,
+      "has_urls": true,
+      "has_attachments": true,
+      "stream_a_score": 0.8646202683448792,
+      "stream_b_score": 0.9985596537590027,
+      "stream_c_score": 0.8,
+      "shap_explanation": "OVERRIDE TRIGGERED: Structural threat detected (DangerousExtensionHandler)",
+      "urls_detected": [
+        "https://www.google.com/drive/storage/quarterly_reports"
+      ],
+      "attachments_detected": [
+        "Financial_Report_Q2_2026.pdf.exe"
+      ],
+      "stream_a_reasoning": "DistilBERT text classification",
+      "stream_b_reasoning": "XGBoost URL classifier (0.9986)",
+      "stream_c_reasoning": "Master Attachment Analyzer (PDF/Excel/Office/Image/HTML)",
+      "stream_breakdown": {
+        "stream_a": 0.8646202683448792,
+        "stream_b": 0.9985596537590027,
+        "stream_c": 0.8
+      }
+    },
+    {
+      "uid": "808",
+      "timestamp": "2026-05-04T14:05:44.862643",
+      "sender": "Test Case 22 <dreadlife2combat@gmail.com>",
+      "subject": "CRITICAL: Your Microsoft Account Requires Immediate Verification -\r\n Action Required Within 2 Hours",
+      "final_confidence": 0.95,
+      "has_urls": true,
+      "has_attachments": true,
+      "stream_a_score": 0.999711811542511,
+      "stream_b_score": 0.95,
+      "stream_c_score": 0.35,
+      "shap_explanation": "OVERRIDE TRIGGERED: Structural threat detected (OfficeDocAnalyzer (Macro Detection))",
+      "urls_detected": [
+        "https://rnicrosoft.com/verify/account?token=abc123&redirect=login"
+      ],
+      "attachments_detected": [
+        "Account_Verification_Required.docm"
+      ],
+      "stream_a_reasoning": "DistilBERT text classification",
+      "stream_b_reasoning": "XGBoost URL classifier (0.9980) + Heuristic boosts: Typosquat: rnicrosoft ≈ microsoft (84.2%), Credential harvesting pattern detected",
+      "stream_c_reasoning": "Master Attachment Analyzer (PDF/Excel/Office/Image/HTML)",
+      "stream_breakdown": {
+        "stream_a": 0.999711811542511,
+        "stream_b": 0.95,
+        "stream_c": 0.35
+      }
+    },
+    {
+      "uid": "809",
+      "timestamp": "2026-05-04T14:05:46.594158",
+      "sender": "Test Case 23 <dreadlife2combat@gmail.com>",
+      "subject": "Invoice #INV-2026-847293 - Payment Confirmation Required",
+      "final_confidence": 0.95,
+      "has_urls": true,
+      "has_attachments": true,
+      "stream_a_score": 0.9998056292533875,
+      "stream_b_score": 0.95,
+      "stream_c_score": 0.8,
+      "shap_explanation": "OVERRIDE TRIGGERED: Structural threat detected (DangerousExtensionHandler)",
+      "urls_detected": [
+        "http://192.168.1.100:9999/billing/verify?invoice=INV-2026-847293"
+      ],
+      "attachments_detected": [
+        "invoice_INV-2026-847293.pdf.exe"
+      ],
+      "stream_a_reasoning": "DistilBERT text classification",
+      "stream_b_reasoning": "XGBoost URL classifier (0.9974) + Heuristic boosts: IP-based domain: 192.168.1.100, Credential harvesting pattern detected",
+      "stream_c_reasoning": "Master Attachment Analyzer (PDF/Excel/Office/Image/HTML)",
+      "stream_breakdown": {
+        "stream_a": 0.9998056292533875,
+        "stream_b": 0.95,
+        "stream_c": 0.8
+      }
+    },
+    {
+      "uid": "811",
+      "timestamp": "2026-05-04T18:47:07.138432",
+      "sender": "Obite <overbite222@gmail.com>",
+      "subject": "=?UTF-8?Q?Urgent=3A_Payroll_Update_Required_=E2=80=93_Action_Needed_Be?=\r\n\t=?UTF-8?Q?fore_Friday=5F3?=",
+      "final_confidence": 0.8297830629348755,
+      "has_urls": true,
+      "has_attachments": true,
+      "stream_a_score": 0.9995179176330566,
+      "stream_b_score": 0.95,
+      "stream_c_score": 0.0,
+      "shap_explanation": "Text analysis (Stream A): PHISHING (1.00 confidence, force=0.450)\nURL analysis (Stream B): SUSPICIOUS (0.95 confidence, force=0.380)\nAttachment analysis (Stream C): SAFE (0.00 confidence, force=0.000)\n\nFinal verdict: PHISHING (confidence: 0.83)",
+      "urls_detected": [
+        "http://univers1ty-payroll-verify.secure-hrportal.net/login"
+      ],
+      "attachments_detected": [
+        "W9_Verification_Form.pdf.exe.pdf"
+      ],
+      "stream_a_reasoning": "DistilBERT text classification",
+      "stream_b_reasoning": "XGBoost URL classifier (0.9979) + Heuristic boosts: Credential harvesting pattern detected",
+      "stream_c_reasoning": "Master Attachment Analyzer (PDF/Excel/Office/Image/HTML)",
+      "stream_breakdown": {
+        "stream_a": 0.9995179176330566,
+        "stream_b": 0.95,
+        "stream_c": 0.0
+      }
+    },
+    {
+      "uid": "813",
+      "timestamp": "2026-05-04T18:47:12.787665",
+      "sender": "Obite <overbite222@gmail.com>",
+      "subject": "=?UTF-8?Q?Exclusive_Job_Offer_=E2=80=93_=2495=2C000_Salary_=E2=80=93_Please_Re?=\r\n\t=?UTF-8?Q?view_and_Respond?=",
+      "final_confidence": 0.6887997025251388,
+      "has_urls": false,
+      "has_attachments": true,
+      "stream_a_score": 0.9982604384422302,
+      "stream_b_score": 0.0,
+      "stream_c_score": 0.0,
+      "shap_explanation": "Text analysis (Stream A): PHISHING (1.00 confidence, force=0.689)\nAttachment analysis (Stream C): SAFE (0.00 confidence, force=0.000)\n\nFinal verdict: PHISHING (confidence: 0.69)",
+      "urls_detected": [],
+      "attachments_detected": [
+        "JobOffer_DataAnalyst_2026.pdf.malware"
+      ],
+      "stream_a_reasoning": "DistilBERT text classification",
+      "stream_b_reasoning": "",
+      "stream_c_reasoning": "Master Attachment Analyzer (PDF/Excel/Office/Image/HTML)",
+      "stream_breakdown": {
+        "stream_a": 0.9982604384422302,
+        "stream_b": 0.0,
+        "stream_c": 0.0
+      }
+    },
+    {
+      "uid": "814",
+      "timestamp": "2026-05-04T18:47:15.323092",
+      "sender": "Obite <overbite222@gmail.com>",
+      "subject": "=?UTF-8?Q?Updated_Employee_Handbook_=E2=80=93_Please_Review_at_Your_?=\r\n\t=?UTF-8?Q?Earliest_Convenience?=",
+      "final_confidence": 0.831600683927536,
+      "has_urls": true,
+      "has_attachments": true,
+      "stream_a_score": 0.9864214658737183,
+      "stream_b_score": 0.969277560710907,
+      "stream_c_score": 0.0,
+      "shap_explanation": "Text analysis (Stream A): PHISHING (0.99 confidence, force=0.444)\nURL analysis (Stream B): SUSPICIOUS (0.97 confidence, force=0.388)\nAttachment analysis (Stream C): SAFE (0.00 confidence, force=0.000)\n\nFinal verdict: PHISHING (confidence: 0.83)",
+      "urls_detected": [
+        "https://hr.yourcompany.com/handbook"
+      ],
+      "attachments_detected": [
+        "Employee_handbook.exe.malware.pdf"
+      ],
+      "stream_a_reasoning": "DistilBERT text classification",
+      "stream_b_reasoning": "XGBoost URL classifier (0.9693)",
+      "stream_c_reasoning": "Master Attachment Analyzer (PDF/Excel/Office/Image/HTML)",
+      "stream_breakdown": {
+        "stream_a": 0.9864214658737183,
+        "stream_b": 0.969277560710907,
+        "stream_c": 0.0
+      }
+    },
+    {
+      "uid": "815",
+      "timestamp": "2026-05-04T18:47:19.084987",
+      "sender": "Obite <overbite222@gmail.com>",
+      "subject": "=?UTF-8?Q?Your_FedEx_Package_Could_Not_Be_Delivered_=E2=80=93_Resche?=\r\n\t=?UTF-8?Q?dule_Now?=",
+      "final_confidence": 0.848477229475975,
+      "has_urls": true,
+      "has_attachments": true,
+      "stream_a_score": 0.9992853999137878,
+      "stream_b_score": 0.9969969987869263,
+      "stream_c_score": 0.0,
+      "shap_explanation": "Text analysis (Stream A): PHISHING (1.00 confidence, force=0.450)\nURL analysis (Stream B): SUSPICIOUS (1.00 confidence, force=0.399)\nAttachment analysis (Stream C): SAFE (0.00 confidence, force=0.000)\n\nFinal verdict: PHISHING (confidence: 0.85)",
+      "urls_detected": [
+        "http://fedex-redelivery.track-pkg.net/schedule"
+      ],
+      "attachments_detected": [
+        "ShippingLabel_April2026.pdf.exe.docx"
+      ],
+      "stream_a_reasoning": "DistilBERT text classification",
+      "stream_b_reasoning": "XGBoost URL classifier (0.9970)",
+      "stream_c_reasoning": "Master Attachment Analyzer (PDF/Excel/Office/Image/HTML)",
+      "stream_breakdown": {
+        "stream_a": 0.9992853999137878,
+        "stream_b": 0.9969969987869263,
+        "stream_c": 0.0
+      }
+    },
+    {
+      "uid": "816",
+      "timestamp": "2026-05-04T18:47:22.919495",
+      "sender": "Obite <overbite222@gmail.com>",
+      "subject": "=?UTF-8?Q?IRS_Tax_Refund_Notification_=E2=80=93_You_Are_Owed_=241=2C847?=",
+      "final_confidence": 0.95,
+      "has_urls": true,
+      "has_attachments": true,
+      "stream_a_score": 0.9999186992645264,
+      "stream_b_score": 0.9476235508918762,
+      "stream_c_score": 0.7,
+      "shap_explanation": "OVERRIDE TRIGGERED: Structural threat detected (DangerousExtensionHandler)",
+      "urls_detected": [
+        "https://www.irs.gov"
+      ],
+      "attachments_detected": [
+        "IRS Form.exe.malware"
+      ],
+      "stream_a_reasoning": "DistilBERT text classification",
+      "stream_b_reasoning": "XGBoost URL classifier (0.9476)",
+      "stream_c_reasoning": "Master Attachment Analyzer (PDF/Excel/Office/Image/HTML)",
+      "stream_breakdown": {
+        "stream_a": 0.9999186992645264,
+        "stream_b": 0.9476235508918762,
+        "stream_c": 0.7
+      }
+    },
+    {
+      "uid": "817",
+      "timestamp": "2026-05-04T18:47:25.897626",
+      "sender": "Obite <overbite222@gmail.com>",
+      "subject": "Important Notice Regarding Your Account",
+      "final_confidence": 0.9776606162786484,
+      "has_urls": true,
+      "has_attachments": false,
+      "stream_a_score": 0.9998389482498169,
+      "stream_b_score": 0.95,
+      "stream_c_score": 0.0,
+      "shap_explanation": "Text analysis (Stream A): PHISHING (1.00 confidence, force=0.555)\nURL analysis (Stream B): SUSPICIOUS (0.95 confidence, force=0.423)\n\nFinal verdict: PHISHING (confidence: 0.98)",
+      "urls_detected": [
+        "http://bankofamerica-account-verify.secure-login.net/confirm"
+      ],
+      "attachments_detected": [],
+      "stream_a_reasoning": "DistilBERT text classification",
+      "stream_b_reasoning": "XGBoost URL classifier (0.9978) + Heuristic boosts: Brand inclusion: bankofamerica in bankofamerica-account-verify, Credential harvesting from financial/tech brand",
+      "stream_c_reasoning": "",
+      "stream_breakdown": {
+        "stream_a": 0.9998389482498169,
+        "stream_b": 0.95,
+        "stream_c": 0.0
+      }
+    },
+    {
+      "uid": "818",
+      "timestamp": "2026-05-04T18:47:27.149079",
+      "sender": "Obite <overbite222@gmail.com>",
+      "subject": "Your Netflix Account Has Been Suspended Due to a Payment Issue",
+      "final_confidence": 0.9776743116378784,
+      "has_urls": true,
+      "has_attachments": false,
+      "stream_a_score": 0.9998636245727539,
+      "stream_b_score": 0.95,
+      "stream_c_score": 0.0,
+      "shap_explanation": "Text analysis (Stream A): PHISHING (1.00 confidence, force=0.555)\nURL analysis (Stream B): SUSPICIOUS (0.95 confidence, force=0.423)\n\nFinal verdict: PHISHING (confidence: 0.98)",
+      "urls_detected": [
+        "http://netfl1x-billing-verify.account-secure.net/update"
+      ],
+      "attachments_detected": [],
+      "stream_a_reasoning": "DistilBERT text classification",
+      "stream_b_reasoning": "XGBoost URL classifier (0.9978) + Heuristic boosts: Credential harvesting pattern detected",
+      "stream_c_reasoning": "",
+      "stream_breakdown": {
+        "stream_a": 0.9998636245727539,
+        "stream_b": 0.95,
+        "stream_c": 0.0
+      }
+    },
+    {
+      "uid": "819",
+      "timestamp": "2026-05-04T18:47:28.556220",
+      "sender": "Cole <colemacgrath111@gmail.com>",
+      "subject": "=?UTF-8?Q?Urgent=3A_Payroll_Update_Required_=E2=80=93_Action_Needed_Be?=\r\n\t=?UTF-8?Q?fore_Friday=5F3?=",
+      "final_confidence": 0.8298769670724868,
+      "has_urls": true,
+      "has_attachments": true,
+      "stream_a_score": 0.9997265934944153,
+      "stream_b_score": 0.95,
+      "stream_c_score": 0.0,
+      "shap_explanation": "Text analysis (Stream A): PHISHING (1.00 confidence, force=0.450)\nURL analysis (Stream B): SUSPICIOUS (0.95 confidence, force=0.380)\nAttachment analysis (Stream C): SAFE (0.00 confidence, force=0.000)\n\nFinal verdict: PHISHING (confidence: 0.83)",
+      "urls_detected": [
+        "http://univers1ty-payroll-verify.secure-hrportal.net/login"
+      ],
+      "attachments_detected": [
+        "W9_Verification_Form.pdf.exe.pdf"
+      ],
+      "stream_a_reasoning": "DistilBERT text classification",
+      "stream_b_reasoning": "XGBoost URL classifier (0.9979) + Heuristic boosts: Credential harvesting pattern detected",
+      "stream_c_reasoning": "Master Attachment Analyzer (PDF/Excel/Office/Image/HTML)",
+      "stream_breakdown": {
+        "stream_a": 0.9997265934944153,
+        "stream_b": 0.95,
+        "stream_c": 0.0
+      }
+    },
+    {
+      "uid": "820",
+      "timestamp": "2026-05-04T18:47:29.646301",
+      "sender": "Cole <colemacgrath111@gmail.com>",
+      "subject": "=?UTF-8?Q?CRITICAL=3A_Your_VPN_Certificate_Has_Expired_=E2=80=93_Immed?=\r\n\t=?UTF-8?Q?iate_Action_Required=5F3?=",
+      "final_confidence": 0.7241566419601441,
+      "has_urls": true,
+      "has_attachments": true,
+      "stream_a_score": 0.7231855392456055,
+      "stream_b_score": 0.996807873249054,
+      "stream_c_score": 0.0,
+      "shap_explanation": "Text analysis (Stream A): PHISHING (0.72 confidence, force=0.325)\nURL analysis (Stream B): SUSPICIOUS (1.00 confidence, force=0.399)\nAttachment analysis (Stream C): SAFE (0.00 confidence, force=0.000)\n\nFinal verdict: PHISHING (confidence: 0.72)",
+      "urls_detected": [
+        "http://it-corp-vpn-renewal.helpdesk-secure.net/cert"
+      ],
+      "attachments_detected": [
+        "VPN_Certificate_Update_2026.docx.exe.pdf"
+      ],
+      "stream_a_reasoning": "DistilBERT text classification",
+      "stream_b_reasoning": "XGBoost URL classifier (0.9968)",
+      "stream_c_reasoning": "Master Attachment Analyzer (PDF/Excel/Office/Image/HTML)",
+      "stream_breakdown": {
+        "stream_a": 0.7231855392456055,
+        "stream_b": 0.996807873249054,
+        "stream_c": 0.0
+      }
+    },
+    {
+      "uid": "821",
+      "timestamp": "2026-05-04T18:47:31.112408",
+      "sender": "Cole <colemacgrath111@gmail.com>",
+      "subject": "=?UTF-8?Q?Exclusive_Job_Offer_=E2=80=93_=2495=2C000_Salary_=E2=80=93_Please_Re?=\r\n\t=?UTF-8?Q?view_and_Respond?=",
+      "final_confidence": 0.6887997025251388,
+      "has_urls": false,
+      "has_attachments": true,
+      "stream_a_score": 0.9982604384422302,
+      "stream_b_score": 0.0,
+      "stream_c_score": 0.0,
+      "shap_explanation": "Text analysis (Stream A): PHISHING (1.00 confidence, force=0.689)\nAttachment analysis (Stream C): SAFE (0.00 confidence, force=0.000)\n\nFinal verdict: PHISHING (confidence: 0.69)",
+      "urls_detected": [],
+      "attachments_detected": [
+        "JobOffer_DataAnalyst_2026.pdf.malware"
+      ],
+      "stream_a_reasoning": "DistilBERT text classification",
+      "stream_b_reasoning": "",
+      "stream_c_reasoning": "Master Attachment Analyzer (PDF/Excel/Office/Image/HTML)",
+      "stream_breakdown": {
+        "stream_a": 0.9982604384422302,
+        "stream_b": 0.0,
+        "stream_c": 0.0
+      }
+    },
+    {
+      "uid": "822",
+      "timestamp": "2026-05-04T18:47:32.224961",
+      "sender": "Cole <colemacgrath111@gmail.com>",
+      "subject": "=?UTF-8?Q?Updated_Employee_Handbook_=E2=80=93_Please_Review_at_Your_?=\r\n\t=?UTF-8?Q?Earliest_Convenience?=",
+      "final_confidence": 0.8317173331975938,
+      "has_urls": true,
+      "has_attachments": true,
+      "stream_a_score": 0.9866806864738464,
+      "stream_b_score": 0.969277560710907,
+      "stream_c_score": 0.0,
+      "shap_explanation": "Text analysis (Stream A): PHISHING (0.99 confidence, force=0.444)\nURL analysis (Stream B): SUSPICIOUS (0.97 confidence, force=0.388)\nAttachment analysis (Stream C): SAFE (0.00 confidence, force=0.000)\n\nFinal verdict: PHISHING (confidence: 0.83)",
+      "urls_detected": [
+        "https://hr.yourcompany.com/handbook"
+      ],
+      "attachments_detected": [
+        "Employee_handbook.exe.malware.pdf"
+      ],
+      "stream_a_reasoning": "DistilBERT text classification",
+      "stream_b_reasoning": "XGBoost URL classifier (0.9693)",
+      "stream_c_reasoning": "Master Attachment Analyzer (PDF/Excel/Office/Image/HTML)",
+      "stream_breakdown": {
+        "stream_a": 0.9866806864738464,
+        "stream_b": 0.969277560710907,
+        "stream_c": 0.0
+      }
+    },
+    {
+      "uid": "823",
+      "timestamp": "2026-05-04T18:47:33.404205",
+      "sender": "Cole <colemacgrath111@gmail.com>",
+      "subject": "=?UTF-8?Q?Your_FedEx_Package_Could_Not_Be_Delivered_=E2=80=93_Resche?=\r\n\t=?UTF-8?Q?dule_Now?=",
+      "final_confidence": 0.848477229475975,
+      "has_urls": true,
+      "has_attachments": true,
+      "stream_a_score": 0.9992853999137878,
+      "stream_b_score": 0.9969969987869263,
+      "stream_c_score": 0.0,
+      "shap_explanation": "Text analysis (Stream A): PHISHING (1.00 confidence, force=0.450)\nURL analysis (Stream B): SUSPICIOUS (1.00 confidence, force=0.399)\nAttachment analysis (Stream C): SAFE (0.00 confidence, force=0.000)\n\nFinal verdict: PHISHING (confidence: 0.85)",
+      "urls_detected": [
+        "http://fedex-redelivery.track-pkg.net/schedule"
+      ],
+      "attachments_detected": [
+        "ShippingLabel_April2026.pdf.exe.docx"
+      ],
+      "stream_a_reasoning": "DistilBERT text classification",
+      "stream_b_reasoning": "XGBoost URL classifier (0.9970)",
+      "stream_c_reasoning": "Master Attachment Analyzer (PDF/Excel/Office/Image/HTML)",
+      "stream_breakdown": {
+        "stream_a": 0.9992853999137878,
+        "stream_b": 0.9969969987869263,
+        "stream_c": 0.0
+      }
+    },
+    {
+      "uid": "824",
+      "timestamp": "2026-05-04T18:47:34.614643",
+      "sender": "Cole <colemacgrath111@gmail.com>",
+      "subject": "=?UTF-8?Q?IRS_Tax_Refund_Notification_=E2=80=93_You_Are_Owed_=241=2C847?=",
+      "final_confidence": 0.95,
+      "has_urls": true,
+      "has_attachments": true,
+      "stream_a_score": 0.9998717308044434,
+      "stream_b_score": 0.9476235508918762,
+      "stream_c_score": 0.7,
+      "shap_explanation": "OVERRIDE TRIGGERED: Structural threat detected (DangerousExtensionHandler)",
+      "urls_detected": [
+        "https://www.irs.gov"
+      ],
+      "attachments_detected": [
+        "IRS Form.exe.malware"
+      ],
+      "stream_a_reasoning": "DistilBERT text classification",
+      "stream_b_reasoning": "XGBoost URL classifier (0.9476)",
+      "stream_c_reasoning": "Master Attachment Analyzer (PDF/Excel/Office/Image/HTML)",
+      "stream_breakdown": {
+        "stream_a": 0.9998717308044434,
+        "stream_b": 0.9476235508918762,
+        "stream_c": 0.7
+      }
+    },
+    {
+      "uid": "825",
+      "timestamp": "2026-05-04T18:47:35.785145",
+      "sender": "Cole <colemacgrath111@gmail.com>",
+      "subject": "Important Notice Regarding Your Account",
+      "final_confidence": 0.9776605501174926,
+      "has_urls": true,
+      "has_attachments": false,
+      "stream_a_score": 0.9998388290405273,
+      "stream_b_score": 0.95,
+      "stream_c_score": 0.0,
+      "shap_explanation": "Text analysis (Stream A): PHISHING (1.00 confidence, force=0.555)\nURL analysis (Stream B): SUSPICIOUS (0.95 confidence, force=0.423)\n\nFinal verdict: PHISHING (confidence: 0.98)",
+      "urls_detected": [
+        "http://bankofamerica-account-verify.secure-login.net/confirm"
+      ],
+      "attachments_detected": [],
+      "stream_a_reasoning": "DistilBERT text classification",
+      "stream_b_reasoning": "XGBoost URL classifier (0.9978) + Heuristic boosts: Brand inclusion: bankofamerica in bankofamerica-account-verify, Credential harvesting from financial/tech brand",
+      "stream_c_reasoning": "",
+      "stream_breakdown": {
+        "stream_a": 0.9998388290405273,
+        "stream_b": 0.95,
+        "stream_c": 0.0
+      }
+    },
+    {
+      "uid": "826",
+      "timestamp": "2026-05-04T18:47:36.897195",
+      "sender": "Cole <colemacgrath111@gmail.com>",
+      "subject": "Your Netflix Account Has Been Suspended Due to a Payment Issue",
+      "final_confidence": 0.9776663722991944,
+      "has_urls": true,
+      "has_attachments": false,
+      "stream_a_score": 0.9998493194580078,
+      "stream_b_score": 0.95,
+      "stream_c_score": 0.0,
+      "shap_explanation": "Text analysis (Stream A): PHISHING (1.00 confidence, force=0.555)\nURL analysis (Stream B): SUSPICIOUS (0.95 confidence, force=0.423)\n\nFinal verdict: PHISHING (confidence: 0.98)",
+      "urls_detected": [
+        "http://netfl1x-billing-verify.account-secure.net/update"
+      ],
+      "attachments_detected": [],
+      "stream_a_reasoning": "DistilBERT text classification",
+      "stream_b_reasoning": "XGBoost URL classifier (0.9978) + Heuristic boosts: Credential harvesting pattern detected",
+      "stream_c_reasoning": "",
+      "stream_breakdown": {
+        "stream_a": 0.9998493194580078,
+        "stream_b": 0.95,
+        "stream_c": 0.0
+      }
+    }
+  ],
+  "last_updated": "2026-05-04T18:47:36.897216"
+}

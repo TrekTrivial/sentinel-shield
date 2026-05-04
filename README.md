@@ -35,6 +35,34 @@ git clone https://github.com/TrekTrivial/sentinel-shield.git
 cd sentinel-shield
 ```
 
+**⚠️ Important: Download Large Model Files (Git LFS)**
+
+The repository uses **Git LFS** (Large File Storage) for model files (250MB+):
+```bash
+# Install Git LFS (if not already installed)
+# macOS:
+brew install git-lfs
+
+# Ubuntu/Debian:
+sudo apt-get install git-lfs
+
+# Windows (using Chocolatey):
+choco install git-lfs
+
+# Or download from: https://git-lfs.github.com/
+
+# After installing, initialize Git LFS in the repository:
+git lfs install
+
+# Pull the large model files:
+git lfs pull
+```
+
+**Models Downloaded:**
+- `models/text_model_distilbert/pytorch_model.bin` (250MB) - DistilBERT checkpoint
+- `models/stream_b_xgboost_v2.pkl` (50MB) - URL analyzer
+- `models/stream_c_*.pkl` (10MB) - Attachment analyzer
+
 **Step 2: Create `.env` File**
 ```bash
 # Copy template
